@@ -1,0 +1,246 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.config = {
+    settings: {
+        cardId: 1,
+        checkinTimeThreshold: 15
+	},
+	channelAccessToken: {
+		prod: "xxx",
+        dev: "xxx"
+	},
+    menus: {
+		prod: {
+			join: "richmenu-xxx",
+			radar: "richmenu-xxx"
+		},
+		dev: {
+			join: "richmenu-xxx",
+			radar: "richmenu-xxx"
+		}
+    },
+    keywords: [
+        {
+            name: "参加受付",
+            keywords: ["IoTいちご狩りに参加", "参加受付"],
+            action: "sendUserQrcode"
+        },
+        {
+            name: "居場所",
+            keywords: ["居場所", "今どこ"],
+            action: "sendLastLocation"
+        },
+        {
+            name: "フロアマップ",
+            keywords: ["フロアマップ"],
+            action: "sendMap"
+        },
+        {
+            name: "スタンプ台紙",
+            keywords: ["台紙", "謎解きスタンプラリー"],
+            action: "sendCurrentStampCard"
+        },
+        {
+            name: "ヒント",
+            keywords: ["ヒント"],
+            action: "sendLocationHint"
+        },
+        {
+            name: "アンケート",
+            keywords: ["いちご", "アンケート"],
+            action: "requestEnquete"
+        }
+    ],
+    postbacks: [
+        {
+            name: "qrcode",
+            action: "sendUserQrcode"
+        },
+        {
+            name: "start",
+            action: "startStampRally"
+        },
+        {
+            name: "stampCard",
+            action: "sendCurrentStampCard"
+        },
+        {
+            name: "checkin",
+            action: "checkinLocation"
+        },
+        {
+            name: "location",
+            action: "sendLastLocation"
+        },
+        {
+            name: "floorMap",
+            action: "sendMap"
+        }
+    ],
+    messages: {
+        default: "メニューを選択するか、スタンプ台紙の番号を選択してください。",
+        defaultError: "大変申し訳ありません。\nエラーが発生しました。\nもう一度操作してみてください。",
+        qrcode: {
+            title: "体験参加用QRコード",
+            text: "受付でこのQRコードを見せてね！\n参加用バッジを貸し出しするよ。",
+            button: "受付完了"
+        },
+        complete: "おめでとう！\n全てのいちごが見つかったよ✨",
+        requestEnquete: "スタンプカードに隠された合言葉㊙はわかったかな！？\n合言葉で話しかけてみてね！",
+        noLocationLog: "記録が見つかりませんでした。"
+    },
+    stampCards: {
+        1: {
+            baseUrl: "https://example.com",
+            cardFilepath: "images/card4.png",
+            area: { x: 0, y: 0, width: 1040, height: 1040 },
+            completeMessage: "全てのいちごをみつけたよ！",
+            checkpoints: [
+                {
+                    locationId: 1,
+                    area: { x: 191, y: 291, width: 248, height: 248 },
+                    stamp: {
+                        filepath: "images/stamp.png",
+                        area: { x: 191, y: 291}
+                    }
+                },
+                {
+                    locationId: 2,
+                    area: { x: 597, y: 291, width: 248, height: 248 },
+                    stamp: {
+                        filepath: "images/stamp_1.png",
+                        area: { x: 597, y:  291}
+                    }
+                },
+                {
+                    locationId: 3,
+                    area: { x: 191, y: 662, width: 248, height: 248 },
+                    stamp: {
+                        filepath: "images/stamp_2.png",
+                        area: { x: 191, y:  662}
+                    }
+                },
+                {
+                    locationId: 4,
+                    area: { x: 597, y: 662, width: 248, height: 248 },
+                    stamp: {
+                        filepath: "images/stamp_3.png",
+                        area: { x: 597, y:  662}
+                    }
+                }
+            ]
+        },
+        2: {
+            baseUrl: "https://example.com",
+            cardFilepath: "images/card2.png",
+            area: { x: 0, y: 0, width: 1040, height: 1040 },
+            completeMessage: "全てのいちごをみつけたよ！",
+            checkpoints: [
+                {
+                    locationId: 1,
+                    area: { x: 205, y: 214, width: 247, height: 234 },
+                    stamp: {
+                        filepath: "images/stamp_1.png",
+                        area: { x: 205, y: 210}
+                    }
+                },
+                {
+                    locationId: 2,
+                    area: { x: 628, y: 238, width: 228, height: 245 },
+                    stamp: {
+                        filepath: "images/stamp_2.png",
+                        area: { x: 610, y:  235}
+                    }
+                },
+                {
+                    locationId: 3,
+                    area: { x: 112, y: 538, width: 241, height: 234 },
+                    stamp: {
+                        filepath: "images/stamp_3.png",
+                        area: { x: 112, y:  530}
+                    }
+                },
+                {
+                    locationId: 4,
+                    area: { x: 396, y: 449, width: 231, height: 234 },
+                    stamp: {
+                        filepath: "images/stamp_4.png",
+                        area: { x: 395, y:  435}
+                    }
+                },
+                {
+                    locationId: 5,
+                    area: { x: 398, y: 744, width: 241, height: 245 },
+                    stamp: {
+                        filepath: "images/stamp_5.png",
+                        area: { x: 398, y:  740}
+                    }
+                },
+                {
+                    locationId: 6,
+                    area: { x: 678, y: 617, width: 242, height: 245 },
+                    stamp: {
+                        filepath: "images/stamp_6.png",
+                        area: { x: 678, y:  610}
+                    }
+                }
+            ]
+        }
+    },
+    locations: [
+        {
+            id: 1,
+            keyword: "1番のヒントは？",
+            imageUrl: "https://example.com/hints/IoT_ichigo.png",
+            title: "IoTいちご狩りの体験",
+            hint: "⬇「いちご🍓をつむ」を押してみてね！",
+            answer: "ウッドデッキ 本部受付",
+            receiverId: 1
+        },
+        {
+            id: 2,
+            keyword: "2番のヒントは？",
+            imageUrl: "https://example.com/hints/trek.jpg",
+            title: "WEST 1階にNew Open",
+            hint: "わーカッコいい自転車🚲がいっぱい！",
+            answer: "WEST 1F: トレックバイシクル",
+            receiverId: 2
+        },
+        {
+            id: 3,
+            keyword: "3番のヒントは？",
+            imageUrl: "https://example.com/hints/kuma.jpg",
+            title: "EAST 3階でクマ🐻を発見",
+            hint: "面白そうなおもちゃに夢中😍になっちゃう！",
+            answer: "EAST 3F: ボーネルンド",
+            receiverId: 3
+        },
+        {
+            id: 4,
+            keyword: "4番のヒントは？",
+            imageUrl: "https://example.com/hints/comer.jpg",
+            title: "THE KITCHENで休憩",
+            hint: "いちごのスムージー🥤が飲みたいなぁ～",
+            answer: "ザ・キッチン: コメル",
+            receiverId: 4
+		},
+        {
+            id: 5,
+            keyword: "5番のヒントは？",
+            imageUrl: "https://example.com/hints/haco.jpg",
+            title: "WEST 2階期間限定の…",
+            hint: "この四角い木の箱はなんだろう？",
+            answer: "WEST 2F: HACO",
+            receiverId: 5
+        },
+        {
+            id: 6,
+            keyword: "6番のヒントは？",
+            imageUrl: "https://example.com/hints/ping-pong.jpg",
+            title: "EAST 3階で英語を学ぼう！",
+            hint: "こんなところに卓球が！？\n卓球は英語でなんて言うんだろ？",
+            answer: "EAST 3F: ECC",
+            receiverId: 6
+        }
+    ]
+};
